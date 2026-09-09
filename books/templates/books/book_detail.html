@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block content %}
+<div class="detail-layout">
+    {% if book.cover %}
+        <img class="detail-cover" src="{{ book.cover.url }}" alt="{{ book.title }}">
+    {% else %}
+        <div class="detail-cover-placeholder">Нет обложки</div>
+    {% endif %}
+
+    <div class="detail-body">
+        <h1>{{ book.title }}</h1>
+        <p><strong>Автор:</strong> {{ book.author }}</p>
+        <p><strong>Жанр:</strong> {{ book.genre.name }}</p>
+        {% if book.uploaded_by %}
+            <p><strong>Добавил:</strong> <a href="{% url 'user_profile' book.uploaded_by.username %}">{{ book.uploaded_by.username }}</a></p>
+        {% endif %}
+        <p style="white-space: pre-line;">{{ book.description }}</p>
+
+        <div class="btn-row">
+            {% if book.file %}
+                <a href="{{ book.file.url }}" class="btn" download>Скачать книгу</a>
+            {% else %}
+                <p style="color: var(--color-muted); margin: 0;">Файл книги пока не загружен.</p>
+            {% endif %}
+            <a href="{% url 'book_list' %}" class="btn btn-secondary">Назад к списку</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

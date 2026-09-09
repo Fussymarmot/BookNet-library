@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Добавить книгу{% endblock %}
+
+{% block content %}
+<h1>Добавить книгу</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+                <small class="help-text">{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+                <small class="field-error">{{ error }}</small>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <div class="btn-row">
+        <button type="submit" class="btn">Сохранить</button>
+        <a href="{% url 'book_list' %}" class="btn btn-secondary">Назад</a>
+    </div>
+</form>
+{% endblock %}

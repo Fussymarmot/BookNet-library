@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль {{ profile_user.username }}{% endblock %}
+
+{% block content %}
+<h1>Профиль {{ profile_user.username }}</h1>
+
+<div class="profile-header">
+    {% if profile_user.profile.avatar %}
+        <img class="avatar-img" src="{{ profile_user.profile.avatar.url }}" alt="{{ profile_user.username }}">
+    {% else %}
+        <div class="avatar-placeholder">Нет фото</div>
+    {% endif %}
+
+    <div>
+        <p><strong>Логин:</strong> {{ profile_user.username }}</p>
+        {% if profile_user.profile.bio %}
+            <p>{{ profile_user.profile.bio }}</p>
+        {% endif %}
+        <p><strong>На сайте с:</strong> {{ profile_user.date_joined|date:"d.m.Y" }}</p>
+    </div>
+</div>
+
+<h2>Книги пользователя ({{ books|length }})</h2>
+{% if books %}
+    <ul class="book-owned-list">
+        {% for book in books %}
+            <li><a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a> — {{ book.author }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Пользователь пока не добавил ни одной книги.</p>
+{% endif %}
+{% endblock %}

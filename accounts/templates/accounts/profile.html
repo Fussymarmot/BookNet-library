@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Мой профиль{% endblock %}
+
+{% block content %}
+<h1>Профиль {{ profile_user.username }}</h1>
+
+<div class="profile-header">
+    {% if profile_user.profile.avatar %}
+        <img class="avatar-img" src="{{ profile_user.profile.avatar.url }}" alt="{{ profile_user.username }}">
+    {% else %}
+        <div class="avatar-placeholder">Нет фото</div>
+    {% endif %}
+
+    <div>
+        <p><strong>Логин:</strong> {{ profile_user.username }}</p>
+        <p><strong>Email:</strong> {{ profile_user.email|default:"не указан" }}</p>
+        <p><strong>На сайте с:</strong> {{ profile_user.date_joined|date:"d.m.Y" }}</p>
+    </div>
+</div>
+
+<h2>Редактировать профиль</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="{{ form.avatar.id_for_label }}">Аватар</label>
+        {{ form.avatar }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.bio.id_for_label }}">О себе</label>
+        {{ form.bio }}
+    </div>
+    <button type="submit" class="btn">Сохранить</button>
+</form>
+
+<h2>Мои книги ({{ books|length }})</h2>
+{% if books %}
+    <ul class="book-owned-list">
+        {% for book in books %}
+            <li><a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a> — {{ book.author }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Вы ещё не добавили ни одной книги. <a href="{% url 'add_book' %}">Добавить книгу</a></p>
+{% endif %}
+{% endblock %}
