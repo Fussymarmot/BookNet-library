@@ -18,7 +18,25 @@
             {% endfor %}
         </div>
     {% endfor %}
-    <button type="submit" class="btn">Зарегистрироваться</button>
+    <button type="submit" class="btn" id="submit-btn">Зарегистрироваться</button>
 </form>
 <p>Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></p>
+
+<script>
+    const form = document.querySelector('form');
+    const submitBtn = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', () => {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Регистрируем...';
+    });
+
+    // Разблокировка при возврате «назад» (страница восстанавливается из bfcache)
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Зарегистрироваться';
+        }
+    });
+</script>
 {% endblock %}

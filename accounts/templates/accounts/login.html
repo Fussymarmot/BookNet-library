@@ -18,7 +18,25 @@
     {% if form.non_field_errors %}
         <p class="field-error">{{ form.non_field_errors }}</p>
     {% endif %}
-    <button type="submit" class="btn">Войти</button>
+    <button type="submit" class="btn" id="submit-btn">Войти</button>
 </form>
 <p>Ещё нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></p>
+
+<script>
+    const form = document.querySelector('form');
+    const submitBtn = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', () => {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Входим...';
+    });
+
+    // Разблокировка при возврате «назад» (страница восстанавливается из bfcache)
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Войти';
+        }
+    });
+</script>
 {% endblock %}
