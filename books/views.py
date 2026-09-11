@@ -6,9 +6,9 @@ from .forms import BookForm
 
 
 def book_list(request):
-    query_title = request.GET.get('q_title')  # Поиск по названию книги
-    query_author = request.GET.get('q_author')  # Поиск по автору
-    genre_filter = request.GET.get('genre')  # Фильтр по жанру
+    query_title = request.GET.get('q_title')
+    query_author = request.GET.get('q_author')
+    genre_filter = request.GET.get('genre')
     books = Book.objects.all()
 
     # Фильтрация по названию книги
@@ -27,14 +27,14 @@ def book_list(request):
         except Genre.DoesNotExist:
             books = books.none()  # Если жанр не найден, возвращаем пустой список книг
 
-    # Пагинация: показываем 10 книг на странице
-    paginator = Paginator(books, 10)  # 10 — количество книг на одной странице
+    # Пагинация
+    paginator = Paginator(books, 10)
     page_number = request.GET.get('page')  # Текущая страница из запроса
     page_obj = paginator.get_page(page_number)  # Получаем объекты для текущей страницы
 
     context = {
-        'books': page_obj,  # Передаем объект страницы вместо полного списка
-        'page_obj': page_obj,  # Для пагинации в шаблоне
+        'books': page_obj,
+        'page_obj': page_obj,
         'query_title': request.GET.get('q_title', ''),
         'query_author': request.GET.get('q_author', ''),
         'genre_filter': genre_filter,

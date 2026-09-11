@@ -10,12 +10,12 @@ class Genre(models.Model):
 
 
 class Book(models.Model):
-    title = models.CharField(max_length=200)  # название книги
-    author = models.CharField(max_length=100)  # автор
-    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)  # жанр
-    description = models.TextField()  # описание книги
-    cover = models.ImageField(upload_to='book_covers/', blank=True, null=True)  # обложка книги
-    file = models.FileField(upload_to='book_files/', blank=True, null=True)  # файл книги для скачивания
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=100)
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    description = models.TextField()
+    cover = models.ImageField(upload_to='book_covers/', blank=True, null=True)
+    file = models.FileField(upload_to='book_files/', blank=True, null=True)
     uploaded_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,

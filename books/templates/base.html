@@ -7,7 +7,7 @@
     <title>BookNET - {% block title %} {% endblock %}</title>
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
     <style>
-        /* ============ Токены (цвета — без изменений от исходного проекта) ============ */
+
         :root {
             --color-bg: #f4f4f9;
             --color-surface: #ffffff;
@@ -56,7 +56,7 @@
 
         a { color: inherit; }
 
-        /* ============ Шапка ============ */
+        /*Шапка*/
         header {
             background-color: var(--color-header);
             padding: 0.75rem 1.5rem;
@@ -69,7 +69,7 @@
             width: 300px;
         }
 
-        /* ============ Навигация (адаптивная, без JS — на чекбоксе) ============ */
+        /* Навигация*/
         nav {
             background-color: var(--color-dark);
             color: #fff;
@@ -152,7 +152,7 @@
             }
         }
 
-        /* ============ Контейнер страницы ============ */
+        /* Контейнер страницы  */
         .container {
             max-width: var(--content-width);
             margin: 1.25rem auto;
@@ -164,7 +164,7 @@
 
         .container.container-wide { max-width: var(--content-width-wide); position: relative; }
 
-        /* ============ Боковые баннеры главной страницы (только большие экраны) ============ */
+        /* Боковые баннеры главной страницы */
         .home-side-banner {
             position: absolute;
             top: 1.25rem;
@@ -201,7 +201,7 @@
             }
         }
 
-        /* ============ Кнопки ============ */
+        /* Кнопки */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -245,7 +245,7 @@
             .btn { width: 100%; }
         }
 
-        /* ============ Формы ============ */
+        /* Формы */
         form.stack .form-group,
         .form-group {
             margin-bottom: 1.1rem;
@@ -311,7 +311,7 @@
             .search-form .search-actions { flex-direction: column; }
         }
 
-        /* ============ Сообщения ============ */
+        /* Сообщения */
         .messages { list-style: none; padding: 0; margin: 0 0 1.25rem; }
 
         .messages li {
@@ -323,7 +323,7 @@
             text-align: left;
         }
 
-        /* ============ Сетка книг ============ */
+        /* Сетка книг */
         .book-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
@@ -404,7 +404,7 @@
             color: var(--color-muted);
         }
 
-        /* ============ Пагинация ============ */
+        /* Пагинация */
         .pagination {
             display: flex;
             justify-content: center;
@@ -435,7 +435,7 @@
 
         .pagination .step-links span { font-weight: 600; color: var(--color-muted); }
 
-        /* ============ Разворот страницы книги / профиля ============ */
+        /* Разворот страницы книги / профиля */
         .detail-layout {
             display: flex;
             gap: 2rem;
@@ -506,7 +506,7 @@
         }
         .book-owned-list li:last-child { border-bottom: none; }
 
-        /* ============ Подвал ============ */
+        /* Подвал */
         footer {
             text-align: center;
             padding: 1.25rem;
