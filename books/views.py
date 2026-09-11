@@ -61,3 +61,7 @@ def add_book(request):
         form = BookForm()
 
     return render(request, 'books/add_book.html', {'form': form})
+
+
+def help_page(request):
+    return render(request, 'books/help.html')

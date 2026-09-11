@@ -90,10 +90,31 @@
             display: none;
             align-self: flex-start;
             cursor: pointer;
-            font-size: 1.5rem;
-            line-height: 1;
-            padding: 0.25rem 0.5rem;
+            padding: 0.75rem 0.5rem;
             color: #fff;
+        }
+
+        .nav-toggle-label span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background-color: #fff;
+            border-radius: 2px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .nav-toggle-label span + span { margin-top: 6px; }
+
+        .nav-toggle-checkbox:checked ~ .nav-bar .nav-toggle-label span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .nav-toggle-checkbox:checked ~ .nav-bar .nav-toggle-label span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle-checkbox:checked ~ .nav-bar .nav-toggle-label span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
         }
 
         .nav-links {
@@ -525,7 +546,11 @@
     <nav>
         <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox">
         <div class="nav-bar">
-            <label for="nav-toggle" class="nav-toggle-label" aria-label="Открыть меню">☰</label>
+            <label for="nav-toggle" class="nav-toggle-label" aria-label="Открыть меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
             <div class="nav-links">
                 <a href="{% url 'book_list' %}">Список книг</a>
                 {% if user.is_authenticated %}
@@ -556,7 +581,7 @@
     </div>
 
     <footer>
-        <p>© 2009-2026 BookNET</p>
+        <p>© 2009-2026 BookNET · <a href="{% url 'help' %}">Справка</a></p>
     </footer>
 </body>
 </html>
